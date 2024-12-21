@@ -12,7 +12,7 @@ def main():
             print(f"Adicionado {pokemon_schema.name} ao banco de dados.")
             add_pokemon_to_db(pokemon_schema)
         else:
-            print(f'Não foi possivel obter dados para o Pokémon com ID {pokemon_id}')
+            print(f'Não foi possivel obter dados para o Pokémon com ID {pokemon_id}.')
         time.sleep(10)
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ import requests
 from db import SessionLocal, engine, Base 
 from models import Pokemon
 from schema import PokemonSchema
+from src.db import SessionLocal, engine, Base
 import json
 
 Base.metadata.create_all(bind=engine)
@@ -14,7 +15,8 @@ def fetch_pokemon_data(pokemon_id: int):
         data = response.json()# trazendo a resposta
         with open(f'{data['name']}.json', "w") as f:
             json.dump(data, f)
-        types = ', '.join(['type']['name'] for type in data['types'])
+        types = ', '.join(type_info['type']['name'] for type_info in data['types'])
+
         return PokemonSchema(name=data['name'], type=types)
     else:
         return None
