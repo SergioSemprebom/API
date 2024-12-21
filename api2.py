@@ -1,21 +1,29 @@
 import requests
+from pydantic import BaseModel
 
-# executando o response em aplicao externa
-response = requests.get(f'https://pokeapi.co/api/v2/pokemon/15', verify=False)
+# descelerializar = transforma um ARQ.json em um objeto python
 
-# trazendo a resposta
-data = response.json()
+class PokemonSchema(BaseModel): # Contrato de dados, schema de dados, a view dos dados
 
-# com todos os tipos de pokemon
-data_types = data['types'] #Supondo que 'data é o dicionario com dados
+    name: str
+    type: str
+    
+    class Config:
+        orm_mode = True
 
-# criando uma lista vazia
-types_list = []
+def pegar_pokemon(id: int) -> PokemonSchema:
+    # executando o response em aplicao externa
+    response = requests.get(f'https://pokeapi.co/api/v2/pokemon/{id}')
+    data = response.json()# trazendo a resposta
+    data_types = data['types'] #Supondo que 'data é o dicionario com dados com todos os tipos de pokemon
+    types_list = [] # criando uma lista vazia
+    for type_info in data_types:# adicionando todos os tipos de pokemon nessa lista
+        types_list.append(type_info['type']['name'])
+    types = ', '.join(types_list) # transformando essa lista numa string
 
-# adicionando todos os tipos de pokemon nessa lista
-for type_info in data_types:
-    types_list.append(type_info['type']['name'])
+    return PokemonSchema(name=data['name'], type=types)
 
-# transformando essa lista numa string
-types = ', '.join(types_list)
-print(data['name'], types)
+if __name__ =='__main__':
+    print(pegar_pokemon(10))
+    print(pegar_pokemon(25))
+    print(pegar_pokemon(17))
