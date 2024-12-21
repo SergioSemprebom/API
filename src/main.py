@@ -15,5 +15,5 @@ def main():
             print(f'Não foi possivel obter dados para o Pokémon com ID {pokemon_id}')
         time.sleep(10)
 
-if __name__ == "main__":
+if __name__ == "__main__":
     main()
