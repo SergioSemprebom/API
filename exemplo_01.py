@@ -2,7 +2,7 @@ import requests
 from pydantic import BaseModel
 
 class PokemonSchema(BaseModel):
-    name: int
+    name: str
     type: str
 
     class Config:
@@ -21,5 +21,6 @@ def pegar_pokemon(id: int) -> PokemonSchema:
 
 from pydantic import BaseModel
 
-pokemon = pegar_pokemon(24)
+pokemon = pegar_pokemon(25)
 print(pokemon)
+
