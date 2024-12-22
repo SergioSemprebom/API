@@ -5,7 +5,6 @@ from models import Pokemon
 from schema import PokemonSchema
 import json
 
-
 Base.metadata.create_all(bind=engine)
 
 def fetch_pokemon_data(pokemon_id: int):
