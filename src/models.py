@@ -6,9 +6,6 @@ from db import Base
 
 Base = declarative_base()
 
-
-
-
 class Pokemon(Base):
     __tablename__ = 'pokemons'  # Nome da tabela no banco de dados
 

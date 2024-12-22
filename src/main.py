@@ -3,6 +3,7 @@
 import time
 import random
 from controller import fetch_pokemon_data, add_pokemon_to_db
+from src.db import SessionLocal, engine, Base
 
 def main():
     while True:

@@ -3,8 +3,8 @@ import requests
 from db import SessionLocal, engine, Base 
 from models import Pokemon
 from schema import PokemonSchema
-from src.db import SessionLocal, engine, Base
 import json
+
 
 Base.metadata.create_all(bind=engine)
 
